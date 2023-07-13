@@ -21,7 +21,7 @@ def _create_completion(model: str, messages: list, stream: bool, **kwargs):
         'internetMode': 'auto'
     }
     response = requests.post( 'https://streaming.tenant-forefront-default.knative.chi.coreweave.com/free-chat',
-        json=json_data, stream=True)
+        json=json_data, stream=True, verify=False)
     for token in response.iter_lines(): 
         if b'delta' in token:
             token = json.loads(token.decode().split('data: ')[1])['delta']
